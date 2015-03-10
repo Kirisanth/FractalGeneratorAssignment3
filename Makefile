@@ -1,9 +1,19 @@
-
+CC=gcc
 CFLAGS=-Wall -O2 -fopenmp
+LDFLAGS=-fopenmp
+
+all: julia julia_omp
 
 OBJS =  main.o julia.o savebmp.o color.o getparams.o 
 
 julia: $(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $?
+
+OBJS =  main.o julia_omp.o savebmp.o color.o getparams.o 
+
+julia_omp: $(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $?
+	$(RM) *.o
 
 
 # this runs are on Mac. On Linux, e.g. penguin, replace open by gthumb
@@ -40,4 +50,4 @@ run9:
 
 
 clean:
-	@rm -rf $(OBJS) julia *~ *.bak *.bmp
+	@rm -rf $(OBJS) julia julia_omp *~ *.bak *.bmp *.o

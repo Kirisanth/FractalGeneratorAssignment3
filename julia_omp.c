@@ -1,4 +1,6 @@
 #include <assert.h>
+#include <omp.h>
+#include <stdio.h>
 
 #include "julia.h"
 
@@ -6,6 +8,15 @@ int julia(const double *x, int xres, const double *y, int yres, const double *c,
 		int flag, int maxIterations, int *iterations)
 {
 	int maxIterationCount = 0, i,j;
+
+	//omp_set_num_threads(4);
+	#pragma omp parallel //private(nthreads, tid)
+	{
+		int nthreads, tid;
+		tid = omp_get_thread_num();
+		nthreads = omp_get_num_threads();
+		printf("thread: %d, Max: %d\n", tid, nthreads);
+	}
 
 	double a, b, xgap, ygap, cr, ci, radius;
 	int count;
