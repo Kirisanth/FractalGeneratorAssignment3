@@ -8,7 +8,7 @@ int julia(const double *x, int xres, const double *y, int yres, const double *c,
 		int flag, int maxIterations, int *iterations)
 {
 	int maxIterationCount = 0;
-
+	
 	omp_set_num_threads(4);
 	#pragma omp parallel reduction(max:maxIterationCount)
 	{
@@ -26,7 +26,7 @@ int julia(const double *x, int xres, const double *y, int yres, const double *c,
 	int t_yres = yres/nthreads + ((tid == nthreads - 1)? yres % nthreads : 0);
 	double t_y0 = y[0] + (y[1] - y[0])*tid/nthreads;
 	xgap = (x[1] - x[0]) / xres;
-	ygap = ((y[1] - y[0]) / t_yres) / nthreads;
+	ygap = (y[1] - y[0]) / yres;
 
 	int i,j;
 	for (j = 0; j < t_yres; j++)
