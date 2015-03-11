@@ -1,20 +1,31 @@
-CC=gcc
-CFLAGS=-Wall -O2 -fopenmp
-LDFLAGS=-fopenmp
+CC=pgcc
+CFLAGS=-O2 -mp
+LDFLAGS=-mp
 
-all: julia julia_omp
+all: julia julia_omp 
 
-OBJS =  main.o julia.o savebmp.o color.o getparams.o 
+OBJS =  main.o julia.o savebmp.o color.o getparams.o
 
 julia: $(OBJS)
 	$(CC) $(LDFLAGS) -o $@ $?
 
-OBJS =  main.o julia_omp.o savebmp.o color.o getparams.o 
+OBJS =  main.o julia_omp.o savebmp.o color.o getparams.o
 
 julia_omp: $(OBJS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $?
+
+all: julia_acc_s julia_acc_d
+OBJS =  main.o julia_acc_s.o savebmp.o color.o getparams.o
+
+julia_acc_s: $(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $?
+
+
+OBJS =  main.o julia_acc_d.o savebmp.o color.o getparams.o
+
+julia_acc_d: $(OBJS)
 	$(CC) $(LDFLAGS) -o $@ $?
 	$(RM) *.o
-
 
 # this runs are on Mac. On Linux, e.g. penguin, replace open by gthumb
 run0: 
@@ -50,4 +61,4 @@ run9:
 
 
 clean:
-	@rm -rf $(OBJS) julia julia_omp *~ *.bak *.bmp *.o
+	@rm -rf $(OBJS) julia julia_omp julia_acc_s julia_acc_d *~ *.bak *.bmp *.o
