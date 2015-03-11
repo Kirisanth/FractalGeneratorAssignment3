@@ -8,8 +8,8 @@ int julia(const double *x, int xres, const double *y, int yres, const double *c,
 		int flag, int maxIterations, int *iterations)
 {
 	int maxIterationCount = 0;
-
-	#pragma omp parallel reduction(max:maxIterationCount)
+	//uses reduction "or" instead of max becasue because school compilers are too old to support max
+	#pragma omp parallel reduction(|:maxIterationCount)
 	{
 		int nthreads, tid;
 		tid = omp_get_thread_num();
