@@ -9,15 +9,13 @@ int julia(const double *x, int xres, const double *y, int yres, const double *c,
 {
 	int maxIterationCount = 0;
 
-	omp_set_num_threads(4);
 	#pragma omp parallel reduction(max:maxIterationCount)
 	{
 		int nthreads, tid;
 		tid = omp_get_thread_num();
 		nthreads = omp_get_num_threads();
-		printf("thread: %d, Max: %d\n", tid, nthreads);
+		//printf("thread: %d, Max: %d\n", tid, nthreads);
 	
-
 		double a, b, xgap, ygap, cr, ci, radius;
 		int count;
 
@@ -29,6 +27,7 @@ int julia(const double *x, int xres, const double *y, int yres, const double *c,
 		ygap = (y[1] - y[0]) / yres;
 
 		int i,j;
+		double temp_a;
 		for (j = 0; j < t_yres; j++)
 		{
 			for (i = 0; i < xres; i++)    
@@ -45,7 +44,7 @@ int julia(const double *x, int xres, const double *y, int yres, const double *c,
 				count = 0;
 				while ( radius <= 4.0 && count < maxIterations )
 				{
-					double temp_a = a;
+					temp_a = a;
 					a = a * a - b * b + cr;
 					b = 2.0f * temp_a * b + ci;
 					radius = a * a + b * b;
@@ -63,7 +62,7 @@ int julia(const double *x, int xres, const double *y, int yres, const double *c,
 				likely in the set. */
 				if (radius <= 4.0)
 				{
-					assert(count==maxIterations);
+					//assert(count==maxIterations);
 					*p = 0;
 				}
 				else

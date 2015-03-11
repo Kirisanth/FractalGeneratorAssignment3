@@ -1,13 +1,18 @@
-CC=gcc
-CFLAGS=-O2 -Wall -fopenmp
-LDFLAGS=-fopenmp
+CC=pgcc
+CFLAGS=-fast -acc -Minfo -ta=nvidia,cc13 -O2
+LDFLAGS=-acc -ta=nvidia,cc13
 
-all: julia_omp 
+all: julia_acc_s julia_acc_d
 
-OBJS =  main.o julia_omp.o savebmp.o color.o getparams.o
+OBJS =  main.o julia_acc_s.o savebmp.o color.o getparams.o
 
-julia_omp: $(OBJS)
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $?
+julia_acc_s: $(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $?
+
+OBJS =  main.o julia_acc_d.o savebmp.o color.o getparams.o
+
+julia_acc_d: $(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $?
 	$(RM) *.o
 
 # this runs are on Mac. On Linux, e.g. penguin, replace open by gthumb

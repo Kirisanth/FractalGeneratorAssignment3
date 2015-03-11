@@ -1,20 +1,24 @@
 #include <assert.h>
+#ifdef _OPENACC
+#include <openacc.h>
+#endif
 
 #include "julia.h"
 
-int julia(const double *x, int xres, const double *y, int yres, const double *c, 
-		int flag, int maxIterations, int *iterations)
+int julia(const double* restrict x, int xres, const double* restrict y, int yres, const double* restrict c, 
+		int flag, int maxIterations, int* restrict iterations)
 {
-	int maxIterationCount = 0, i,j;
+	int maxIterationCount = 0;
 
-	double a, b, xgap, ygap, cr, ci, radius;
+	double a, b, xgap, ygap, cr, ci, radius temp_a;
 	int count;
 	xgap = (x[1] - x[0]) / xres;
 	ygap = (y[1] - y[0]) / yres;
-
-	for (j = 0; j < yres; j++)
+	#pragma acc data copyin(x[0:2], y[0:2], c[0:2]) copy(iterations[0:xres*yres])
+	#pragma acc parallel loop reduction(max:maxIterationCount)
+	for (int j = 0; j < yres; j++)
 	{
-		for (i = 0; i < xres; i++)    
+		for (int i = 0; i < xres; i++)    
 		{
 			/* pixel to coordinates */
 			a = x[0] + i * xgap;
@@ -26,15 +30,15 @@ int julia(const double *x, int xres, const double *y, int yres, const double *c,
 
 			radius = 0.0;
 			count = 0;
+			//#pragma acc loop seq
 			while ( radius <= 4.0 && count < maxIterations )
 			{
-				double temp_a = a;
+				temp_a = a;
 				a = a * a - b * b + cr;
 				b = 2.0f * temp_a * b + ci;
 				radius = a * a + b * b;
 				//radius = a_square + b_square;
 				count++;
-
 			}
 
 			if(count > maxIterationCount )
@@ -46,7 +50,7 @@ int julia(const double *x, int xres, const double *y, int yres, const double *c,
 			likely in the set. */
 			if (radius <= 4.0)
 			{
-				assert(count==maxIterations);
+				//assert(count==maxIterations);
 				*p = 0;
 			}
 			else
@@ -57,6 +61,5 @@ int julia(const double *x, int xres, const double *y, int yres, const double *c,
 			}
 		}
 	}
-
 	return maxIterationCount;
 }
