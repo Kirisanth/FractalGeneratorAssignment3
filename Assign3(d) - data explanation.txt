@@ -1,9 +1,9 @@
--openMP consistent speedup with adding processes
--openMP efficiency levels off with adding threads because there is overhead to initializing many threads
--oddly, the performance using 2 and 4 threads was very similar. This could be due to a dissimilar amount of computations required at different regions of the image. The white regions are the most computationally intensive, and the overall run time of the program may be limited by threads that must compute large white regions. Going from 2 to 4 threads, the amount of white region stays similar in the threads that calculate the middle region of that particular image.
+- openMP has a consistent speedup with adding processes.
+- openMP's efficiency levels off with adding threads because there is overhead to initializing many threads.
+- Oddly, the performance using 2 and 4 threads was very similar. This could be due to a dissimilar amount of computations required at different regions of the image. The white regions are the most computationally intensive, and the overall run time of the program may be limited by threads that must compute large white regions. Going from 2 to 4 threads, the amount of white region stays similar in the threads that calculate the middle region of that particular image.
 
--openACC code was significantly faster, since the code is highly parallelizable and the GPUs are a good fit for performing those calculations
--openACC double precision rate was about 1/4 of the single precision rate, which is consistent with the rate of many Nvidia professional GPUs
+- openACC code was significantly faster, since the code is highly parallelizable and the GPUs are a good fit for performing those calculations.
+- The openACC double precision rate was about 1/4 of the single precision rate, which is consistent with the rate of many Nvidia professional GPUs.
 -There was no data transferring between the main memory and GPU memory during the calculations of iterations. All transfers occur before and after the calculations, greatly improving performance by making the performance compute bound rather than memory bound. 
 
 -because the efficiency levels off when adding threads, and because of the huge performance increase with GPUs, it is very advantageous to write code that utilizes GPUs.
