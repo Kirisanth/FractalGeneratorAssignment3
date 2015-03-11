@@ -14,7 +14,8 @@ int julia(const double *x, int xres, const double *y, int yres, const double *c,
 		int nthreads, tid;
 		tid = omp_get_thread_num();
 		nthreads = omp_get_num_threads();
-		//printf("thread: %d, Max: %d\n", tid, nthreads);
+		if (tid == 0)
+			printf("Threads: %d\n", nthreads);
 	
 		double a, b, xgap, ygap, cr, ci, radius;
 		int count;

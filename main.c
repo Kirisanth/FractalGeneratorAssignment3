@@ -10,7 +10,8 @@ int main(int argc, char *argv[])
 	int width, height, maxiter, flag;
 	double x[2], y[2], c[2];
 	char *image, *stats;
-	clock_t start_time;
+	clock_t start_time_c;
+	time_t start_time_t;
 
 	getParams(argv, &flag, c, x, y, &width, &height, &maxiter, &image, &stats);
 
@@ -18,12 +19,15 @@ int main(int argc, char *argv[])
 	assert(iterations);
 
 	/* compute set */
-	start_time = clock();
+	start_time_c = clock();
+	start_time_t = time(NULL);
+	printf("\n");
 
 	int maxCount = julia(x, width, y, height, c, flag, maxiter, iterations);
-	printf("max iterations hit: %d /%d\n", maxCount, maxiter);
+	printf("~max iterations hit: %d /%d\n", maxCount, maxiter);
 
-	printf("Elapsed Time: %f\n\n", ((double)(clock()-start_time))/CLOCKS_PER_SEC);
+	printf("Elapsed Time (clock): %f\n", ((double)(clock()-start_time_c))/CLOCKS_PER_SEC);
+	printf("Elapsed Time (time): %d\n\n", (int)(time(NULL)-start_time_t));
 
 	/* save our picture for the viewer */
 	saveBMP(image, iterations, width, height);
