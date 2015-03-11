@@ -10,12 +10,13 @@ int julia(const double* restrict x, int xres, const double* restrict y, int yres
 {
 	int maxIterationCount = 0;
 
-	double a, b, xgap, ygap, cr, ci, radius temp_a;
+	float a, b, cr, ci, radius, temp_a;
+	double xgap, ygap;
 	int count;
 	xgap = (x[1] - x[0]) / xres;
 	ygap = (y[1] - y[0]) / yres;
-	#pragma acc data copyin(x[0:2], y[0:2], c[0:2]) copy(iterations[0:xres*yres])
-	#pragma acc parallel loop reduction(max:maxIterationCount)
+	#pragma acc data copyin(c[0:2]) copy(iterations[0:xres*yres])
+	#pragma acc parallel loop reduction(max:maxIterationCount) private(flag, xgap, ygap)
 	for (int j = 0; j < yres; j++)
 	{
 		for (int i = 0; i < xres; i++)    
