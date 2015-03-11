@@ -1,3 +1,11 @@
+/* julia_omp.c
+ * CS 4F03 Assignmnet 3
+ * Brandon Byskov, 1068517
+ * Kirisanth Subramaniam, 1054839
+ * Mitch Errgyrs, 1137537
+ * Ramy Abdul Samad, 1152051
+ */
+
 #include <assert.h>
 #include <omp.h>
 #include <stdio.h>

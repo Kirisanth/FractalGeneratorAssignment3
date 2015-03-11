@@ -1,3 +1,11 @@
+/* julia_acc_d.c
+ * CS 4F03 Assignmnet 3
+ * Brandon Byskov, 1068517
+ * Kirisanth Subramaniam, 1054839
+ * Mitch Errgyrs, 1137537
+ * Ramy Abdul Samad, 1152051
+ */
+
 #include <assert.h>
 #ifdef _OPENACC
 #include <openacc.h>
