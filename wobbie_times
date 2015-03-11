@@ -1,0 +1,96 @@
+
+Threads: 1
+~max iterations hit: 4000 /4000
+Elapsed Time (clock): 62.830000
+Elapsed Time (time): 63
+
+--- SharcNET Job Epilogue ---
+Job completed successfully.
+               jobid: 667048
+               resid: 1600155
+         exit status: 0
+      allocated time: 64.7553
+           user time: 62.91
+         system time: 0.09
+peak rss=120619008; peak vsz=120619008 (bytes)
+atime=64.7553; utime=62.91; stime=0.09; exit=0
+
+Threads: 2
+~max iterations hit: 4000 /4000
+Elapsed Time (clock): 63.230000
+Elapsed Time (time): 38
+
+--- SharcNET Job Epilogue ---
+Job completed successfully.
+               jobid: 667049
+               resid: 1600284
+         exit status: 0
+      allocated time: 39.8279
+           user time: 63.65
+         system time: 0.09
+peak rss=120868864; peak vsz=120868864 (bytes)
+atime=39.8279; utime=63.65; stime=0.09; exit=0
+
+Threads: 4
+~max iterations hit: 4000 /4000
+Elapsed Time (clock): 63.920000
+Elapsed Time (time): 37
+
+--- SharcNET Job Epilogue ---
+Job completed successfully.
+               jobid: 667050
+               resid: 1600414
+         exit status: 0
+      allocated time: 38.4471
+           user time: 65.03
+         system time: 0.07
+peak rss=121688064; peak vsz=121688064 (bytes)
+atime=38.4471; utime=65.03; stime=0.07; exit=0
+
+Threads: 8
+~max iterations hit: 4021 /4000
+Elapsed Time (clock): 65.270000
+Elapsed Time (time): 24
+
+--- SharcNET Job Epilogue ---
+Job completed successfully.
+               jobid: 667057
+               resid: 1600803
+         exit status: 0
+      allocated time: 26.41
+           user time: 67.91
+         system time: 0.09
+peak rss=120250368; peak vsz=120250368 (bytes)
+atime=26.41; utime=67.91; stime=0.09; exit=0
+
+Threads: 16
+~max iterations hit: 4095 /4000
+Elapsed Time (clock): 68.470000
+Elapsed Time (time): 13
+
+--- SharcNET Job Epilogue ---
+Job completed successfully.
+               jobid: 667058
+               resid: 1600811
+         exit status: 0
+      allocated time: 14.8781
+           user time: 73.73
+         system time: 0.12
+peak rss=120594432; peak vsz=120594432 (bytes)
+atime=14.8781; utime=73.73; stime=0.12; exit=0
+
+Threads: 32
+~max iterations hit: 4095 /4000
+Elapsed Time (clock): 74.850000
+Elapsed Time (time): 7
+
+--- SharcNET Job Epilogue ---
+Job completed successfully.
+               jobid: 667059
+               resid: 1600827
+         exit status: 0
+      allocated time: 8.45097
+           user time: 87.57
+         system time: 0.18
+peak rss=120754176; peak vsz=120754176 (bytes)
+atime=8.45097; utime=87.57; stime=0.18; exit=0
