@@ -6,7 +6,8 @@
  * Ramy Abdul Samad, 1152051
  */
 
-#include <assert.h>
+//#include <assert.h>
+#include <stdio.h>
 #ifdef _OPENACC
 #include <openacc.h>
 #endif
@@ -23,6 +24,9 @@ int julia(const double* restrict x, int xres, const double* restrict y, int yres
 	int count;
 	xgap = (x[1] - x[0]) / xres;
 	ygap = (y[1] - y[0]) / yres;
+
+	printf("julia_acc_s:\n");
+
 	#pragma acc data copyin(c[0:2]) copy(iterations[0:xres*yres])
 	#pragma acc parallel loop reduction(max:maxIterationCount) private(flag, xgap, ygap)
 	for (int j = 0; j < yres; j++)

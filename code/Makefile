@@ -1,8 +1,8 @@
 CC=gcc
-CFLAGS=-O2 -Wall -fopenmp
+CFLAGS=-O3 -Wall -fopenmp
 LDFLAGS=-fopenmp
 
-all: julia_omp 
+all: julia_omp
 
 OBJS =  main.o julia_omp.o savebmp.o color.o getparams.o
 

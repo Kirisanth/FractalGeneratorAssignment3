@@ -1,9 +1,12 @@
+CS 4F03 Assign 3,part d
+
 - openMP has a consistent speedup with adding processes.
-- openMP's efficiency levels off with adding threads because there is overhead to initializing many threads.
-- Oddly, the performance using 2 and 4 threads was very similar. This could be due to a dissimilar amount of computations required at different regions of the image. The white regions are the most computationally intensive, and the overall run time of the program may be limited by threads that must compute large white regions. Going from 2 to 4 threads, the amount of white region stays similar in the threads that calculate the middle region of that particular image.
+- openMP's efficiency gradually levels off with adding threads because there is a serial time associated with allocating the "iterations" array memory, some small initializaiton task, and the time it takes to fork new threads.
+- The performance improves fairly consistently when adding new threads, since we made sure to evenly distribute the computational load among threads. We don't have any threads doing much more work than any others. 
+- When we performance stested only the parallel sections without any serial sections, the code scaled very well, almost 1:1 with the numer of threads. 
 
-- openACC code was significantly faster, since the code is highly parallelizable and the GPUs are a good fit for performing those calculations.
-- The openACC double precision rate was about 1/4 of the single precision rate, which is consistent with the rate of many Nvidia professional GPUs.
--There was no data transferring between the main memory and GPU memory during the calculations of iterations. All transfers occur before and after the calculations, greatly improving performance by making the performance compute bound rather than memory bound. 
+- openACC code was faster, since the code is highly parallelizable and the GPUs are a good fit for performing those calculations.
+- The openACC double precision rate was about 1/4 or 1/3 of the single precision rate, which is consistent with the rate of many Nvidia professional GPUs.
+-There were no large data transferring between the main memory and GPU memory during the calculations of iterations. All larege memory transfers occur before and after the calculations, greatly improving performance by making the performance compute bound rather than memory bound. 
 
--because the efficiency levels off when adding threads, and because of the huge performance increase with GPUs, it is very advantageous to write code that utilizes GPUs.
+- Because of the parallelizability of the code and performance with GPUs, and the fact that it takes ~ 16-32 CPU cores to reach the same performance, it is very advantageous to write code that utilizes GPUs. 

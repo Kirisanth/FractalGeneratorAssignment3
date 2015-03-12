@@ -1,0 +1,48 @@
+
+Threads: 1
+~max iterations hit: 4000 /4000
+Elapsed Time (clock): 57.900000
+Elapsed Time (time): 58
+
+
+Threads: 2
+~max iterations hit: 4000 /4000
+Elapsed Time (clock): 57.940000
+Elapsed Time (time): 29
+
+
+Threads: 4
+~max iterations hit: 4000 /4000
+Elapsed Time (clock): 57.960000
+Elapsed Time (time): 15
+
+
+Threads: 8
+~max iterations hit: 4000 /4000
+Elapsed Time (clock): 58.010000
+Elapsed Time (time): 7
+
+
+Threads: 16
+~max iterations hit: 4000 /4000
+Elapsed Time (clock): 57.930000
+Elapsed Time (time): 7
+
+
+Threads: 32
+~max iterations hit: 4000 /4000
+Elapsed Time (clock): 57.940000
+Elapsed Time (time): 7
+
+
+julia_acc_s:
+~max iterations hit: 4000 /4000
+Elapsed Time (clock): 0.920000
+Elapsed Time (time): 2
+
+
+julia_acc_d:
+~max iterations hit: 4000 /4000
+Elapsed Time (clock): 3.440000
+Elapsed Time (time): 4
+

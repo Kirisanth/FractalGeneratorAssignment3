@@ -12,6 +12,8 @@ int main(int argc, char *argv[])
 	char *image, *stats;
 	clock_t start_time_c;
 	time_t start_time_t;
+	start_time_c = clock();
+	start_time_t = time(NULL);
 
 	getParams(argv, &flag, c, x, y, &width, &height, &maxiter, &image, &stats);
 
@@ -19,8 +21,7 @@ int main(int argc, char *argv[])
 	assert(iterations);
 
 	/* compute set */
-	start_time_c = clock();
-	start_time_t = time(NULL);
+	
 	printf("\n");
 
 	int maxCount = julia(x, width, y, height, c, flag, maxiter, iterations);
